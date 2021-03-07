@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">BuscaCEP</string>
+    <string name="txtBtnSearch">Buscar CEP</string>
+    <string name="digite_o_seu_cep">Digite o seu CEP..</string>
 </resources>
