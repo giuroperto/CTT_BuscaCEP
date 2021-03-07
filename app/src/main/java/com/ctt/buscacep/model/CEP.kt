@@ -12,7 +12,7 @@ data class CEP(
     val bairro: String,
     @SerializedName("localidade")
     val cidade: String,
-    @SerializedName("estado")
+    @SerializedName("uf")
 //    com o arroba estamos marcando, marcamos que era o nome original
 //    @Deprecated("nao eh cep")
     val uf: String,
