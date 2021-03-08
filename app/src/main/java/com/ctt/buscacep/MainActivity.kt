@@ -65,6 +65,13 @@ class MainActivity : AppCompatActivity() {
 
 //        val callback = Callback<CEP>()
 
+
+//        Call<CEP> = Preparacao de uma chamada do tipo CEP
+//        Callback<CEP> = Fazer a chamada do tipo CEP, que me trara uma resposta do tipo CEP
+//        Response<CEP> = Resposta da API do tipo CEP
+
+//        SEMPRE IMPORTAR TUDO DO RETROFIT
+
         chamada.enqueue(
 // callback -> call eh a chamada, callback eh o retorno
 //        instanciar um callback do tipo CEP pois vem do service

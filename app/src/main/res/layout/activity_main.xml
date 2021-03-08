@@ -31,9 +31,17 @@
         app:layout_constraintGuide_percent="0.5"
         />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.02"
+        />
+
     <EditText
         android:id="@+id/edtCEP"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:hint="@string/digite_o_seu_cep"
@@ -63,7 +71,7 @@
         android:layout_height="wrap_content"
         android:textSize="24sp"
         android:textAlignment="center"
-        android:text="CEP: 000000,\nAlguma Coisa...\nTestando 123."
+        tools:text="CEP: 00000-000,\nRua: Nome da Rua\nBairro: Nome do Bairro\nCidade: Nome da Cidade / UF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnBuscarCEP"
         app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
