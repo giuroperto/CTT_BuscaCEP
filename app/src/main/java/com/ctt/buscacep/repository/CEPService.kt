@@ -1,4 +1,4 @@
-package com.ctt.buscacep
+package com.ctt.buscacep.repository
 
 import com.ctt.buscacep.model.CEP
 import retrofit2.Call

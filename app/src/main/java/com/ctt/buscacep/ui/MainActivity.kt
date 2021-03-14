@@ -5,19 +5,17 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import com.ctt.buscacep.CEPService
-import com.ctt.buscacep.Network
+import androidx.lifecycle.Observer
 import com.ctt.buscacep.R
 import com.ctt.buscacep.model.CEP
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var campoCEP: EditText
     private lateinit var botaoCEP: Button
     private lateinit var respostaCEP: TextView
+
+    private val viewModel = MainActivityViewModel()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,84 +40,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun buscarCEP(cep: String) {
-//        Iniciar requisicao a API para buscar CEP
 
-//        val retrofitClient = Network.RetrofitConfig("https://viacep.com.br/ws/01001000/json/")
-        val retrofitClient = Network.RetrofitConfig("https://viacep.com.br/ws/")
-
-//        val cepExemplo = CEP(rua = "Rua Qualquer", bairro = "Meu bairro", cidade = "Minha cidade", uf = "Meu estado", moroAqui = true)
-//        cepExemplo.toString() // <- nosso TOSTRING personalizado
-
-//        Criando servico que contera as rotas (final da URL) e atribuindo ela a configuracao do meu retrofit
-//        crio as rotas que ele vai utilizar -> todas que estao no cepservice
-//        "https://viacep.com.br/ws/ + {cepInserido}/json/"
-//        precisa receber antes da app rodar -> oq tem antes -> arquivo java
-        val servico = retrofitClient.create(CEPService::class.java)
-
-//        agora que vai ter a chamada
-        val chamada = servico.buscarCEP(cep)
-
-//        e o retorno?
-
-//        metodo retrofit enqueue que pode ser nulo
-//        Responsavel por realizar a chamada
-//        1) .execute tambem podemos utilizar -> realiza a chamada de maneira SINCRONA
-//        2) .enqueue -> realiza a chamada de maneira ASSINCRONA
-
-//        val callback = Callback<CEP>()
-
-
-//        Call<CEP> = Preparacao de uma chamada do tipo CEP
-//        Callback<CEP> = Fazer a chamada do tipo CEP, que me trara uma resposta do tipo CEP
-//        Response<CEP> = Resposta da API do tipo CEP
-
-//        SEMPRE IMPORTAR TUDO DO RETROFIT
-
-        chamada.enqueue(
-// callback -> call eh a chamada, callback eh o retorno
-//        instanciar um callback do tipo CEP pois vem do service
-//            pegue um objeto do tipo callback -> objeto abstrato e precisamos implementar os membros dele
-
-//            precisamos entender a resposta -> callback -> 2 respostas (response/failure)
-            object : Callback<CEP> {
-                override fun onResponse(call: Call<CEP>, response: Response<CEP>) {
-//                    quando tiver resposta -> faca
-//                    pega a resposta pelo body
-//                    da pra fazer let caso a mensagem seja nula
-//                    response.body().let {
-//                        it.
-//                    }
-
-//                    respostaCEP.text = response.body().toString()
-                    val endereco = response.body()?.toString()
-
-//                    if (endereco.isNotEmpty()) {
-//                        respostaCEP.text = endereco
-//                    } else {
-//                        respostaCEP.text = "Opa, nao foi encontrado endereco nenhum"
-//                    }
-                    endereco?.let {
-                        if (it.isNotEmpty()) {
-                            respostaCEP.text = endereco
-                        } else {
-                            respostaCEP.text = "Opa, nao foi encontrado endereco nenhum"
+//        como eh dado vivo, tem que observar, pois so a partir dai vai saber se deu tudo certo
+        viewModel.buscarCEP(cep).observe(
+//                paramentros: dono/contexto e o que vai fazer (callback)
+                this,
+                object : Observer<CEP> {
+//                     quando o dado sofre alteracao
+//                    t -> parametros genericos
+                    override fun onChanged(t: CEP?) {
+                        t?.let {
+//                             so tem o papel de exibir os dados no final, nao faz mais nada -> talvez apenas alguma validacao se o campo esta vazio, mas so
+                            respostaCEP.text = it.toString()
                         }
                     }
-
-
-//                    response.body().toString() // nao da problema pois se vier nulo a string e nula, diferente de se pegar um atributo direto
                 }
-
-                override fun onFailure(call: Call<CEP>, t: Throwable) {
-//                    quando tiver erro -> faca
-//                    falha de conexao (timeout)
-//                    erro de rota
-//                    FALHA DE COMUNICACAO
-                    respostaCEP.text = "Opa, houve erro na comunicacao, tente novamente mais tarde!"
-                }
-
-            }
         )
+
     }
 
 }

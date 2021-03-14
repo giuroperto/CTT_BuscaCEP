@@ -1,4 +1,4 @@
-package com.ctt.buscacep
+package com.ctt.buscacep.repository
 
 import com.google.gson.Gson
 import retrofit2.Retrofit
