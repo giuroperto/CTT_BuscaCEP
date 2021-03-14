@@ -3,6 +3,7 @@ package com.ctt.buscacep.ui
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ctt.buscacep.model.CEP
+import com.ctt.buscacep.model.StateResponse
 import com.ctt.buscacep.repository.CEPRepository
 
 // RESPONSAVEL PELA PARTE DA REGRA DE NEGOCIO QUE CONECTA A INTERACAO DO USUARIO COM A CAMADA DE COMUNICACAO (REPOSITORIO)
@@ -13,10 +14,11 @@ class MainActivityViewModel(
 ) : ViewModel() {
 
 //    dado mutavel do tipo CEP -> dado vivo que activity fica escutando e sabe quando algo mudar
-    private lateinit var CEPLiveData : MutableLiveData<CEP>
+//    private lateinit var CEPLiveData : MutableLiveData<CEP>
+    private lateinit var CEPLiveData : MutableLiveData<StateResponse<CEP>>
 
 //    pode ter varios tipos de valores -> valores de erro e excecoes
-    fun buscarCEP(cepInserido: String) : MutableLiveData<CEP> {
+    fun buscarCEP(cepInserido: String) : MutableLiveData<StateResponse<CEP>> {
 
 //    if (CEPLiveData == null && cepInserido.isNotEmpty()) {
 //     se for vazio ja vai informar o usuario -> validacao de campos vai direto na activity

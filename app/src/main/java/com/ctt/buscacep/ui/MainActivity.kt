@@ -8,6 +8,9 @@ import android.widget.TextView
 import androidx.lifecycle.Observer
 import com.ctt.buscacep.R
 import com.ctt.buscacep.model.CEP
+import com.ctt.buscacep.model.StateError
+import com.ctt.buscacep.model.StateResponse
+import com.ctt.buscacep.model.StateSuccess
 
 class MainActivity : AppCompatActivity() {
 
@@ -45,15 +48,25 @@ class MainActivity : AppCompatActivity() {
         viewModel.buscarCEP(cep).observe(
 //                paramentros: dono/contexto e o que vai fazer (callback)
                 this,
-                object : Observer<CEP> {
-//                     quando o dado sofre alteracao
-//                    t -> parametros genericos
-                    override fun onChanged(t: CEP?) {
+                object : Observer<StateResponse<CEP>> {
+                    override fun onChanged(t: StateResponse<CEP>?) {
                         t?.let {
-//                             so tem o papel de exibir os dados no final, nao faz mais nada -> talvez apenas alguma validacao se o campo esta vazio, mas so
-                            respostaCEP.text = it.toString()
+                            when(t) {
+//                                quando T for uma classe do tipo sucesso, faz isso e erro faz aquilo
+//                                  is eh para verificacao de classes
+                                is StateSuccess -> respostaCEP.text = t.data.toString()
+                                is StateError -> respostaCEP.text = "Opa, aconteceu alguma coisa!"
+                            }
                         }
                     }
+//                     quando o dado sofre alteracao
+//                    t -> parametros genericos
+//                    override fun onChanged(t: CEP?) {
+//                        t?.let {
+////                             so tem o papel de exibir os dados no final, nao faz mais nada -> talvez apenas alguma validacao se o campo esta vazio, mas so
+//                            respostaCEP.text = it.toString()
+//                        }
+//                    }
                 }
         )
 
@@ -79,3 +92,7 @@ class MainActivity : AppCompatActivity() {
 //api -> requisicao pela internet -> nao da pra usar assim -> precisa de permissao no MANIFEST
 
 //se retornasse uma imagem -> imageView = setImageURL("http")
+
+
+
+// trabalhamos na clean code com arquiteturas genericas mas escalaveis

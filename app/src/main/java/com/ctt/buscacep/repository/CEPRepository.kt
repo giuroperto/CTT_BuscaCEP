@@ -3,6 +3,9 @@ package com.ctt.buscacep.repository
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.ctt.buscacep.model.CEP
+import com.ctt.buscacep.model.StateError
+import com.ctt.buscacep.model.StateResponse
+import com.ctt.buscacep.model.StateSuccess
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -11,8 +14,8 @@ import retrofit2.Response
 
 class CEPRepository {
 
-    fun buscarViaCEP(cepUsuario: String) : MutableLiveData<CEP> {
-        val cepLiveData = MutableLiveData<CEP>()
+    fun buscarViaCEP(cepUsuario: String) : MutableLiveData<StateResponse<CEP>> {
+        val cepLiveData = MutableLiveData<StateResponse<CEP>>()
 
         // todas as chamadas de CEP ficarao aqui
 
@@ -85,7 +88,10 @@ class CEPRepository {
                         if(response.isSuccessful && response.body() != null) {
 //                             acessa o valor pois se nao retornaria tudo que tem em MutableLiveData
 //                              quero indicar o que esta dentro desse dado mutavel -> variavel -> CEP
-                            cepLiveData.value = response.body()
+
+                            response.body()?.let {
+                                cepLiveData.value = StateSuccess(it)
+                            }
                         }
 
                     }
@@ -97,8 +103,14 @@ class CEPRepository {
 //                    FALHA DE COMUNICACAO
 //                        respostaCEP.text = "Opa, houve erro na comunicacao, tente novamente mais tarde!"
 
-                        Log.d("TAG", "Deu ruim!")
+//                        Log.d("TAG", "Deu ruim!")
 
+
+//                         se algo der errado, acessa o bd local
+
+//                        CEPLocalRepository().buscarCEPLocal()
+
+                        cepLiveData.value = StateError(t)
                     }
 
                 }
