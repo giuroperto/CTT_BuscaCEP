@@ -1,10 +1,13 @@
-package com.ctt.buscacep
+package com.ctt.buscacep.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import com.ctt.buscacep.CEPService
+import com.ctt.buscacep.Network
+import com.ctt.buscacep.R
 import com.ctt.buscacep.model.CEP
 import retrofit2.Call
 import retrofit2.Callback
