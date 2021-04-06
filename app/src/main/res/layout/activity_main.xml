@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@+id/guidelineTop"
-        app:layout_constraintGuide_percent="0.5"
+        app:layout_constraintGuide_percent="0.65"
         />
 
     <androidx.constraintlayout.widget.Guideline
@@ -40,34 +40,89 @@
         />
 
     <TextView
+        android:id="@+id/txtCEPResponse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
+        android:textSize="24sp"
+        android:textAlignment="center"
+        tools:text="CEP: 00000-000,\nRua: Nome da Rua\nBairro: Nome do Bairro\nCidade: Nome da Cidade / UF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnBuscarCEP"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        />
+
+    <TextView
+        android:id="@+id/txt_description"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_desc"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guidelineTop"
+        android:layout_marginTop="72dp"
+        android:textSize="18dp"
         />
 
 
     <EditText
         android:id="@+id/edtCEP"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
-        android:hint="@string/digite_o_seu_cep"
+        android:hint="@string/txt_digite_o_seu_cep"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
         app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
-        app:layout_constraintTop_toTopOf="@+id/guidelineTop"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineMiddle"
+        app:layout_constraintTop_toBottomOf="@+id/txt_description"
+        android:layout_marginTop="48dp"
+        />
+
+    <TextView
+        android:id="@+id/txtOu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_ou"
+        android:layout_marginTop="18dp"
+        app:layout_constraintTop_toBottomOf="@+id/edtCEP"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="20dp"
         />
 
     <EditText
         android:id="@+id/edtAddress"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
-        android:hint="@string/digite_endereco"
+        android:hint="@string/txt_digite_endereco"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
         app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
-        app:layout_constraintTop_toBottomOf="@+id/edtCEP"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineMiddle"
+        app:layout_constraintTop_toBottomOf="@+id/txtOu"
+        />
+
+    <EditText
+        android:id="@+id/edtCity"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:hint="@string/txt_digite_city"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
+        app:layout_constraintTop_toBottomOf="@+id/edtAddress"
+        android:layout_marginTop="20dp"
+        />
+
+    <EditText
+        android:id="@+id/edtState"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:hint="@string/txt_digite_state"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
+        app:layout_constraintTop_toBottomOf="@+id/edtCity"
+        android:layout_marginTop="20dp"
         />
 
     <Button
@@ -80,19 +135,6 @@
         android:layout_marginTop="8dp"
         android:padding="16dp"
         app:layout_constraintTop_toTopOf="@+id/guidelineMiddle"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
-        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
-        />
-
-    <TextView
-        android:id="@+id/txtCEPResponse"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:textAlignment="center"
-        tools:text="CEP: 00000-000,\nRua: Nome da Rua\nBairro: Nome do Bairro\nCidade: Nome da Cidade / UF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnBuscarCEP"
         app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
         />

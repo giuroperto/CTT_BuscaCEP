@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">BuscaCEP</string>
-    <string name="txtBtnSearch">Buscar CEP</string>
+    <string name="txtBtnSearch">Buscar</string>
     <string name="txt_digite_o_seu_cep">Digite o seu CEP...</string>
-    <string name="txt_digite_endereco">Digite o endereço...</string>
+    <string name="txt_digite_endereco">Digite o endereço</string>
+    <string name="txt_digite_city">Digite a cidade</string>
+    <string name="txt_digite_state">Digite o estado</string>
+    <string name="txt_ou">ou</string>
     <string name="txt_desc">Digite o CEP a ser pesquisado ou o endereco.</string>
 </resources>
