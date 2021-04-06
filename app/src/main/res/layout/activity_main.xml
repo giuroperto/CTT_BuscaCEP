@@ -39,6 +39,13 @@
         app:layout_constraintGuide_percent="0.02"
         />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        />
+
+
     <EditText
         android:id="@+id/edtCEP"
         android:layout_width="wrap_content"
@@ -48,6 +55,18 @@
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
         app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
         app:layout_constraintTop_toTopOf="@+id/guidelineTop"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineMiddle"
+        />
+
+    <EditText
+        android:id="@+id/edtAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:hint="@string/digite_endereco"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
+        app:layout_constraintTop_toBottomOf="@+id/edtCEP"
         app:layout_constraintBottom_toTopOf="@+id/guidelineMiddle"
         />
 
