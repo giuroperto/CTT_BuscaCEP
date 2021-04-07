@@ -6,7 +6,7 @@ import com.ctt.buscacep.model.CEP
 import com.ctt.buscacep.model.StateResponse
 import com.ctt.buscacep.repository.CEPRepository
 
-class MainActivityViewModel(
+class CEPViewModel(
         private val cepRepository: CEPRepository = CEPRepository()
 ) : ViewModel() {
 
