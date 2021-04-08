@@ -20,4 +20,4 @@ class AddressViewModel(
 
 // TODO: 06/04/2021 create enum for states
 // TODO: 06/04/2021 create fun to adjust city name when it has spaces
-// TODO: 06/04/2021 adjust result fun to loop through array 
+// TODO: 06/04/2021 adjust result fun to loop through array
