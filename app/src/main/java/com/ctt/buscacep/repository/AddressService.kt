@@ -13,5 +13,5 @@ interface AddressService {
             @Path("searchState") state: String,
             @Path("searchCity") city: String,
             @Path("searchAddress") street: String
-    ) : Call<Address>
+    ) : Call<Array<Address>>
 }

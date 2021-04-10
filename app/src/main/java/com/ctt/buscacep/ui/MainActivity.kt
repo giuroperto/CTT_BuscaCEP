@@ -3,6 +3,7 @@ package com.ctt.buscacep.ui
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.lifecycle.Observer
@@ -15,7 +16,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var cepField: EditText
     private lateinit var addressField: EditText
     private lateinit var cityField: EditText
-//    private lateinit var stateField: EditText
     private lateinit var formBtn: Button
     private lateinit var resultTxt: TextView
     private lateinit var stateSpn: Spinner
@@ -34,7 +34,6 @@ class MainActivity : AppCompatActivity() {
         cepField = findViewById(R.id.edtCEP)
         addressField = findViewById(R.id.edtAddress)
         cityField = findViewById(R.id.edtCity)
-//        stateField = findViewById(R.id.spnState)
         formBtn = findViewById(R.id.btnBuscarCEP)
         resultTxt = findViewById(R.id.txtCEPResponse)
         stateSpn = findViewById(R.id.spnState)
@@ -52,9 +51,7 @@ class MainActivity : AppCompatActivity() {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     TODO("Not yet implemented")
                 }
-
             }
-
         }
 
         formBtn.setOnClickListener {
@@ -69,15 +66,21 @@ class MainActivity : AppCompatActivity() {
                     searchAddress(address, city, selectedState)
                 } else {
                     cepField.error = "Ou digite um CEP valido!"
-                    addressField.error = "Ou digite um endereco valido..."
-                    cityField.error = "E uma cidade valida..."
+                }
 
-                    if (selectedState == resources.getStringArray(R.array.state_acronym)[0]) {
-                        val errorText: TextView? = stateSpn.selectedView as TextView?
-                        errorText?.error = ""
-                        errorText?.setTextColor(Color.RED)
-                        errorText?.text = "Selecione um estado!"
-                    }
+                if (address.isEmpty()) {
+                    addressField.error = "Ou digite um endereco valido..."
+                }
+
+                if (city.isEmpty()) {
+                    cityField.error = "E uma cidade valida..."
+                }
+
+                if (selectedState == resources.getStringArray(R.array.state_acronym)[0]) {
+                    val errorText: TextView? = stateSpn.selectedView as TextView?
+                    errorText?.error = ""
+                    errorText?.setTextColor(Color.RED)
+                    errorText?.text = "Selecione um estado!"
                 }
             }
         }
@@ -102,13 +105,27 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun searchAddress(address: String, city: String, state: String) {
+
         addressViewModel.fetchAddress(address, city, state).observe(
                 this,
-                object : Observer<StateResponse<Address>> {
-                    override fun onChanged(t: StateResponse<Address>?) {
+                object : Observer<StateResponse<Array<Address>>> {
+                    override fun onChanged(t: StateResponse<Array<Address>>?) {
+                        println("Dentro on changed")
+
                         t?.let {
+
+                            println("Dentro LET")
+
+                            if (t is StateSuccess) {
+                                Log.d("SUCESSO", t.data.toString())
+                            } else {
+                                Log.e("ERROR", "ERRO")
+                            }
+
+
                             when(t) {
-                                is StateSuccess -> resultTxt.text = t.data.toString()
+//                                is StateSuccess ->Log.d("API CALL", t.data.toString())
+//                                is StateSuccess -> resultTxt.text = t.data.toString()
                                 is StateError -> resultTxt.text = "Opa, aconteceu alguma coisa!"
                             }
                         }

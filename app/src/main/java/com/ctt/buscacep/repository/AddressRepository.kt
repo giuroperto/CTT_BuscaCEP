@@ -8,8 +8,8 @@ import retrofit2.Response
 
 class AddressRepository {
 
-    fun searchAddress(state: String, city: String, street: String, ) : MutableLiveData<StateResponse<Address>> {
-        val addressLiveData = MutableLiveData<StateResponse<Address>>()
+    fun searchAddress(state: String, city: String, street: String, ) : MutableLiveData<StateResponse<Array<Address>>> {
+        val addressLiveData = MutableLiveData<StateResponse<Array<Address>>>()
 
         val retrofitClient = Network.RetrofitConfig("https://viacep.com.br/ws/")
 
@@ -18,8 +18,9 @@ class AddressRepository {
         val call = service.fetchAddress(state = state, city = city, street = street)
 
         call.enqueue(
-                object : Callback<Address> {
-                    override fun onResponse(call: Call<Address>, response: Response<Address>) {
+                object : Callback<Array<Address>> {
+
+                    override fun onResponse(call: Call<Array<Address>>, response: Response<Array<Address>>) {
                         if (response.isSuccessful && response.body() != null) {
                             response.body()?.let {
                                 addressLiveData.value = StateSuccess(it)
@@ -27,12 +28,15 @@ class AddressRepository {
                         }
                     }
 
-                    override fun onFailure(call: Call<Address>, t: Throwable) {
+                    override fun onFailure(call: Call<Array<Address>>, t: Throwable) {
                         addressLiveData.value = StateError(t)
                     }
+
+
                 }
         )
 
+        println(addressLiveData.value)
         return addressLiveData
 
     }
