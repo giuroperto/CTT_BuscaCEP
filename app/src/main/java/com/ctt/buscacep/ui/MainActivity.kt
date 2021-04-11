@@ -138,4 +138,5 @@ class MainActivity : AppCompatActivity() {
 
 
 // TODO: 09/04/2021 testar breakpoint condicional 
-// TODO: 09/04/2021 testar breakpoint com alteracao de variavel 
+// TODO: 09/04/2021 testar breakpoint com alteracao de variavel
+// TODO: 10/04/2021 fix request/response from api using address
