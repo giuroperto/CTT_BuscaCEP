@@ -1,5 +1,7 @@
 package com.ctt.buscacep.repository
 
+import android.net.Uri
+import android.provider.MediaStore
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.ctt.buscacep.model.CEP

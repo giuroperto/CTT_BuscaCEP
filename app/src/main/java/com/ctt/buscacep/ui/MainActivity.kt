@@ -54,6 +54,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        // TODO: 11/04/2021 to delete after test
+        addressViewModel.fetchAddress()
+
         formBtn.setOnClickListener {
             val cep = cepField.text.toString()
             val address = addressField.text.toString()
@@ -63,7 +66,7 @@ class MainActivity : AppCompatActivity() {
                 searchCEP(cep)
             } else {
                 if (address.isNotEmpty() && city.isNotEmpty() && selectedState.isNotEmpty()) {
-                    searchAddress(address, city, selectedState)
+//                    searchAddress(address, city, selectedState)
                 } else {
                     cepField.error = "Ou digite um CEP valido!"
                 }
@@ -104,35 +107,36 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun searchAddress(address: String, city: String, state: String) {
-
-        addressViewModel.fetchAddress(address, city, state).observe(
-                this,
-                object : Observer<StateResponse<Array<Address>>> {
-                    override fun onChanged(t: StateResponse<Array<Address>>?) {
-                        println("Dentro on changed")
-
-                        t?.let {
-
-                            println("Dentro LET")
-
-                            if (t is StateSuccess) {
-                                Log.d("SUCESSO", t.data.toString())
-                            } else {
-                                Log.e("ERROR", "ERRO")
-                            }
-
-
-                            when(t) {
-//                                is StateSuccess ->Log.d("API CALL", t.data.toString())
-//                                is StateSuccess -> resultTxt.text = t.data.toString()
-                                is StateError -> resultTxt.text = "Opa, aconteceu alguma coisa!"
-                            }
-                        }
-                    }
-                }
-        )
-    }
+//    fun searchAddress(address: String, city: String, state: String) {
+//
+////        addressViewModel.fetchAddress(address, city, state).observe(
+//        addressViewModel.fetchAddress().observe(
+//                this,
+//                object : Observer<StateResponse<AddressList>> {
+//                    override fun onChanged(t: StateResponse<AddressList>?) {
+//                        println("Dentro on changed")
+//
+//                        t?.let {
+//
+//                            println("Dentro LET")
+//
+//                            if (t is StateSuccess) {
+//                                Log.d("SUCESSO", t.data.toString())
+//                            } else {
+//                                Log.e("ERROR", "ERRO")
+//                            }
+//
+//
+//                            when(t) {
+////                                is StateSuccess ->Log.d("API CALL", t.data.toString())
+////                                is StateSuccess -> resultTxt.text = t.data.toString()
+//                                is StateError -> resultTxt.text = "Opa, aconteceu alguma coisa!"
+//                            }
+//                        }
+//                    }
+//                }
+//        )
+//    }
 
 }
 
