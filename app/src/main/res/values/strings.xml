@@ -8,6 +8,8 @@
     <string name="txt_ou">ou</string>
     <string name="txt_desc">Digite o CEP a ser pesquisado ou o endereco.</string>
     <string name="selected_item">Estado: </string>
+    <string name="cep_search">Buscar por CEP</string>
+    <string name="address_search">Buscar por endereco</string>
 
     <string-array name="state_acronym">
         <item>Selecione o estado...</item>

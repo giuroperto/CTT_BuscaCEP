@@ -1,6 +1,6 @@
 package com.ctt.buscacep.repository
 
-import com.ctt.buscacep.model.AddressList
+import com.ctt.buscacep.model.Address
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -12,5 +12,5 @@ interface AddressService {
             @Path("searchState") state: String,
             @Path("searchCity") city: String,
             @Path("searchAddress") street: String
-    ) : Call<AddressList>
+    ) : Call<List<Address>>
 }

@@ -18,7 +18,3 @@ data class Address (
         return "Rua: $street\nBairro: $neighbourhood\nCidade: $city\nEstado: $state"
     }
 }
-
-class AddressList (
-        val list: Array<Address>
-)

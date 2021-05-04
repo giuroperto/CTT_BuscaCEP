@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ctt.buscacep.model.Address
-import com.ctt.buscacep.model.AddressList
 import com.ctt.buscacep.model.CEP
 import com.ctt.buscacep.model.StateResponse
 import com.ctt.buscacep.repository.AddressRepository
@@ -12,19 +11,15 @@ import com.ctt.buscacep.repository.AddressRepository
 class AddressViewModel(
         private val addressRepository: AddressRepository = AddressRepository()
 ) : ViewModel() {
-    private lateinit var AddressLiveData: MutableLiveData<StateResponse<AddressList>>
+//    private lateinit var AddressLiveData: MutableLiveData<StateResponse<List<Address>>>
+    private lateinit var AddressLiveData: MutableLiveData<List<Address>>
 
-    fun fetchAddress() : MutableLiveData<StateResponse<AddressList>> {
+//    fun fetchAddress() : MutableLiveData<StateResponse<List<Address>>> {
+    fun fetchAddress() : MutableLiveData<List<Address>> {
 //    fun fetchAddress(inputAddress: String, inputCity: String, inputState: String) : MutableLiveData<StateResponse<AddressList>> {
 
-//        val adjustedAddress = inputAddress.replace(" ", "%20").toLowerCase()
-//        println(adjustedAddress)
-
-//        val adjustedCity = inputCity.replace(" ", "%20").toLowerCase()
-//        println(adjustedCity)
-
 //        AddressLiveData = addressRepository.searchAddress(state = inputState, city = adjustedCity, street = adjustedAddress)
-        AddressLiveData = addressRepository.searchAddress(state = "SP", city = "sao%20paulo", street = "abilio")
+        AddressLiveData = addressRepository.searchAddress(state = "SP", city = "sao paulo", street = "abilio")
 
         Log.e("error","RESPOSTA API")
         Log.e("error", AddressLiveData.value.toString())
