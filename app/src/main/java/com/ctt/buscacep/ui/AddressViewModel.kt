@@ -11,15 +11,13 @@ import com.ctt.buscacep.repository.AddressRepository
 class AddressViewModel(
         private val addressRepository: AddressRepository = AddressRepository()
 ) : ViewModel() {
-//    private lateinit var AddressLiveData: MutableLiveData<StateResponse<List<Address>>>
-    private lateinit var AddressLiveData: MutableLiveData<List<Address>>
+    private lateinit var AddressLiveData: MutableLiveData<StateResponse<List<Address>>>
 
 //    fun fetchAddress() : MutableLiveData<StateResponse<List<Address>>> {
-    fun fetchAddress() : MutableLiveData<List<Address>> {
-//    fun fetchAddress(inputAddress: String, inputCity: String, inputState: String) : MutableLiveData<StateResponse<AddressList>> {
+    fun fetchAddress(inputAddress: String, inputCity: String, inputState: String) : MutableLiveData<StateResponse<List<Address>>> {
 
-//        AddressLiveData = addressRepository.searchAddress(state = inputState, city = adjustedCity, street = adjustedAddress)
-        AddressLiveData = addressRepository.searchAddress(state = "SP", city = "sao paulo", street = "abilio")
+        AddressLiveData = addressRepository.searchAddress(state = inputState, city = inputCity, street = inputAddress)
+//        AddressLiveData = addressRepository.searchAddress(state = "SP", city = "sao paulo", street = "abilio")
 
         Log.e("error","RESPOSTA API")
         Log.e("error", AddressLiveData.value.toString())

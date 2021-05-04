@@ -9,11 +9,8 @@ import retrofit2.Response
 
 class AddressRepository {
 
-//    fun searchAddress(state: String, city: String, street: String, ) : MutableLiveData<StateResponse<List<Address>>> {
-//        val addressLiveData = MutableLiveData<StateResponse<List<Address>>>()
-    fun searchAddress(state: String, city: String, street: String, ) : MutableLiveData<List<Address>> {
-        val addressLiveData = MutableLiveData<List<Address>>()
-
+    fun searchAddress(state: String, city: String, street: String, ) : MutableLiveData<StateResponse<List<Address>>> {
+        val addressLiveData = MutableLiveData<StateResponse<List<Address>>>()
         val retrofitClient = Network.RetrofitConfig("https://viacep.com.br/ws/")
 
         val service = retrofitClient.create(AddressService::class.java)
@@ -37,16 +34,14 @@ class AddressRepository {
 
                             response.body()?.let {
                                 Log.d("API RESPONSE", it.toString())
-//                                addressLiveData.value = StateSuccess(it)
-                                addressLiveData.value = listOf(Address("00000-000", "Abilio", "Paraiso", "Sao Paulo","SP"))
+                                addressLiveData.value = StateSuccess(it)
                             }
                         }
                     }
 
                     override fun onFailure(call: Call<List<Address>>, t: Throwable) {
                         Log.d("TRACKER", "inside failure repository")
-//                        addressLiveData.value = StateError(t)
-                        addressLiveData.value = listOf(Address("11111-111", "Abilio", "Paraiso", "Sao Paulo","SP"))
+                        addressLiveData.value = StateError(t)
                     }
                 }
         )

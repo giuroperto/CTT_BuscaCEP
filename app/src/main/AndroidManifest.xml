@@ -11,6 +11,8 @@
         android:roundIcon="@drawable/ic_mailbox"
         android:supportsRtl="true"
         android:theme="@style/Theme.BuscaCEP">
+        <activity android:name=".ui.AddressActivity"></activity>
+        <activity android:name=".ui.CepActivity" />
         <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -6,7 +6,8 @@
     <string name="txt_digite_city">Digite a cidade</string>
     <string name="txt_digite_state">Digite o estado</string>
     <string name="txt_ou">ou</string>
-    <string name="txt_desc">Digite o CEP a ser pesquisado ou o endereco.</string>
+    <string name="txt_cep_desc">Digite o CEP a ser pesquisado.</string>
+    <string name="txt_address_desc">Digite o endereco a ser pesquisado.</string>
     <string name="selected_item">Estado: </string>
     <string name="cep_search">Buscar por CEP</string>
     <string name="address_search">Buscar por endereco</string>
