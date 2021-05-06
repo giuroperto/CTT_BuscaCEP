@@ -3,9 +3,17 @@ package com.ctt.buscacep.ui
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.*
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.ctt.buscacep.R
+import com.ctt.buscacep.model.Address
+import com.ctt.buscacep.model.StateError
+import com.ctt.buscacep.model.StateResponse
+import com.ctt.buscacep.model.StateSuccess
 
 class AddressActivity : AppCompatActivity() {
 
@@ -13,6 +21,7 @@ class AddressActivity : AppCompatActivity() {
     private lateinit var cityField: EditText
     private lateinit var formBtn: Button
     private lateinit var stateSpn: Spinner
+    private lateinit var rvResults: RecyclerView
 
     private val addressViewModel = AddressViewModel()
 
@@ -27,6 +36,7 @@ class AddressActivity : AppCompatActivity() {
         addressField = findViewById(R.id.edtAddress)
         cityField = findViewById(R.id.edtCity)
         formBtn = findViewById(R.id.btnBuscarCEP)
+        rvResults = findViewById(R.id.rv_results)
 
         stateSpn = findViewById(R.id.spnState)
 
@@ -48,16 +58,14 @@ class AddressActivity : AppCompatActivity() {
 
             //         TODO: 11/04/2021 to delete after test
 //            addressViewModel.fetchAddress()
-            addressViewModel.fetchAddress("Abilio", "Sao Paulo", "SP")
+//            val listOfAddresses = addressViewModel.fetchAddress("Abilio", "Sao Paulo", "SP") as List<Address>
 
             formBtn.setOnClickListener {
                 val address = addressField.text.toString()
                 val city = cityField.text.toString()
 
                 if (address.isNotEmpty() && city.isNotEmpty() && selectedState.isNotEmpty()) {
-//                    searchAddress(address, city, selectedState)
-                } else {
-//                    cepField.error = "Ou digite um CEP valido!"
+                    searchAddress(address, city, selectedState)
                 }
 
                 if (address.isEmpty()) {
@@ -75,5 +83,29 @@ class AddressActivity : AppCompatActivity() {
                     errorText?.text = "Selecione um estado!"
                 }
             }
+    }
+
+    fun searchAddress(address: String, city: String, state: String) {
+
+        addressViewModel.fetchAddress(address, city, state).observe(
+                this,
+                object : Observer<StateResponse<List<Address>>> {
+                    override fun onChanged(t: StateResponse<List<Address>>?) {
+                        t?.let {
+
+                            if (t is StateSuccess) {
+                                val adapter = AddressAdapter(t.data)
+                                rvResults.adapter = adapter
+                                rvResults.layoutManager = LinearLayoutManager(this@AddressActivity)
+//                                Log.d("SUCESSO", t.data.toString())
+                            } else {
+                                Toast.makeText(this@AddressActivity, "Erro ao buscar endereco!", Toast.LENGTH_SHORT).show()
+//                                Log.e("ERROR", "ERRO")
+                            }
+
+                        }
+                    }
+                }
+        )
     }
 }

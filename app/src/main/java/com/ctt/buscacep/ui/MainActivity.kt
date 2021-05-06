@@ -34,41 +34,8 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-
-//    fun searchAddress(address: String, city: String, state: String) {
-//
-////        addressViewModel.fetchAddress(address, city, state).observe(
-//        addressViewModel.fetchAddress().observe(
-//                this,
-//                object : Observer<StateResponse<AddressList>> {
-//                    override fun onChanged(t: StateResponse<AddressList>?) {
-//                        println("Dentro on changed")
-//
-//                        t?.let {
-//
-//                            println("Dentro LET")
-//
-//                            if (t is StateSuccess) {
-//                                Log.d("SUCESSO", t.data.toString())
-//                            } else {
-//                                Log.e("ERROR", "ERRO")
-//                            }
-//
-//
-//                            when(t) {
-////                                is StateSuccess ->Log.d("API CALL", t.data.toString())
-////                                is StateSuccess -> resultTxt.text = t.data.toString()
-//                                is StateError -> resultTxt.text = "Opa, aconteceu alguma coisa!"
-//                            }
-//                        }
-//                    }
-//                }
-//        )
-//    }
-
 }
 
 
 // TODO: 09/04/2021 testar breakpoint condicional 
 // TODO: 09/04/2021 testar breakpoint com alteracao de variavel
-// TODO: 10/04/2021 fix request/response from api using address
